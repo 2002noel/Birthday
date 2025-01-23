@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="results-container">
+        <h1>Results</h1>
+        <p>What is Noel's animal?</p>
+        <p>Your answer: <span id="selectedAnimal"></span></p>
+        <p>Correct answer: <span id="correctAnimal">Whale</span></p>
+        <p>When did we first meet?</p>
+        <p>Your answer: <span id="selectedDate"></span></p>
+        <p>Correct answer: <span id="correctDate">2024 July</span></p>
+        <button onclick="location.href='index.html'" type="button">Restart</button>
+    </div>
+
+    <div id="birthday-message" style="display: none;">
+        <h1>Happy birthday babe!!</h1>
+        <p>Too broke for presents so I just made this for you!</p>
+        <button onclick="location.href='index.html'" type="button">Restart</button>
+    </div>
+
+    <img src="finalcat.png" id="final-cat" alt="Pixelated Cat" style="display: none;">
+    <div id="heart-container"></div>
+    <audio id="celebration-sound" src="celebration.mp3"></audio>
+
+    <script>
+        document.getElementById('selectedAnimal').innerText = localStorage.getItem('selectedAnimal');
+        document.getElementById('selectedDate').innerText = localStorage.getItem('selectedDate');
+        if(localStorage.getItem('selectedAnimal') === 'whale') {
+            document.getElementById('selectedAnimal').style.color = 'green';
+        } else {
+            document.getElementById('selectedAnimal').style.color = 'red';
+        }
+        if(localStorage.getItem('selectedDate') === '2024 July') {
+            document.getElementById('selectedDate').style.color = 'green';
+        } else {
+            document.getElementById('selectedDate').style.color = 'red';
+        }
+
+        // If both answers are correct, show birthday message, draw a cat pixel by pixel, shoot out hearts, and play sound
+        if(localStorage.getItem('selectedAnimal') === 'whale' && localStorage.getItem('selectedDate') === '2024 July') {
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('birthday-message').style.display = 'block';
+
+            var finalCat = document.getElementById('final-cat');
+            finalCat.style.display = 'block';
+            finalCat.classList.add('bounce-in');
+
+            // Play celebration sound
+            var celebrationSound = document.getElementById('celebration-sound');
+            celebrationSound.play();
+
+            // Function to shoot out hearts
+            function shootHearts() {
+                const heartContainer = document.getElementById('heart-container');
+                for (let i = 0; i < 20; i++) {
+                    const heart = document.createElement('img');
+                    heart.src = 'Heart.png';
+                    heart.className = 'heart';
+                    heart.style.setProperty('--x', `${Math.random() * 200 - 100}vw`);
+                    heart.style.setProperty('--y', `${Math.random() * 200 - 100}vh`);
+                    heartContainer.appendChild(heart);
+
+                    heart.addEventListener('animationend', () => {
+                        heart.remove();
+                    });
+                }
+            }
+
+            // Trigger the shootHearts function every 1 second
+            setInterval(shootHearts, 1000);
+
+            // Add corner images dynamically
+            const cornerImages = [
+                { class: 'top-left', src: 'us.jpg' },
+                { class: 'top-right', src: 'us2.jpg' },
+                { class: 'bottom-left', src: 'us3.png' },
+                { class: 'bottom-right', src: 'us4.jpg' }
+            ];
+
+            cornerImages.forEach(image => {
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.className = `corner-image ${image.class}`;
+                document.body.appendChild(img);
+            });
+        }
+    </script>
+</body>
+</html>

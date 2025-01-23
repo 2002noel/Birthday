@@ -1,0 +1,121 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #2cd0fa;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+#pixel-cat {
+    /*the cat is 200 pixels above the h1*/
+    position: absolute;
+    top: 100px;
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+    image-rendering: pixelated; /* Ensures the image remains pixelated */
+}
+
+#cat-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.cat {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    animation: splurt 2s ease-out forwards;
+}
+
+@keyframes splurt {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1);
+        opacity: 0;
+    }
+}
+
+#heart-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    width: 50px; /* Increase the size of the hearts */
+    height: auto;
+    animation: shoot 3s ease-out forwards; /* Make the animation last longer */
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Add a drop shadow */
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1);
+        opacity: 1;
+    }
+}
+
+.corner-image {
+    /*lowest z-index to be behind everything*/
+    z-index: -1;
+    position: absolute;
+    width: 300px;
+     /* Adjust the size as needed */
+    height: auto;
+}
+
+.top-left {
+    top: -50px;
+    left: 0;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+h1 {
+    font-size: 4em;
+    color: #ff47f6;
+}
+
+h2 {
+    font-size: 2em;
+    color: #000000;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+    cursor: pointer;
+}

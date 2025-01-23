@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice Question</title>
+   <link rel="stylesheet" href="style.css">
+    </style>
+</head>
+<body>
+    <h1>Multiple Choice Question</h1>
+    <form>
+        <p>What is Noel's animal?</p>
+        <input type="radio" name="animal" value="dog">Dog<br>
+        <input type="radio" name="animal" value="cat">Cat<br>
+        <input type="radio" name="animal" value="fish">Fish<br>
+        <input type="radio" name="animal" value="whale">Whale<br>
+    </form>
+
+    <button onclick="location.href='question2.html'" type="button">Next</button>
+</body>
+</html>
+<script>
+    document.querySelector('form').addEventListener('change', function(event) {
+        if (event.target.name === 'animal') {
+            localStorage.setItem('selectedAnimal', event.target.value);
+        }
+
+    });
+</script>
